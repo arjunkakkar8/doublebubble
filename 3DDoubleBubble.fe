@@ -1,8 +1,16 @@
+/*Create variables that determine initial conditions of the system*/
+
 #define V1 1
 #define V2 2
 
+
+/*Weighted surface area is energy associated with the facets*/
+
 quantity facet_area energy method facet_scalar_integral
 scalar_integrand: exp(x^2+y^2+z^2)
+
+
+/*Define two facet_density methods which calculate the integral over the vector field on the facets. This vector field is such that its divergence equals the density. By stokes theorem, this calculates the weighted volume enclosed by the facets.*/
 
 method_instance facet_density1 method facet_vector_integral
 vector_integrand:
@@ -17,9 +25,14 @@ q2: 0
 q3: 0
 
 
+/*Fix the weighted volume inside the two bubbles to the specified values*/
+
 quantity vol1 fixed = V1 method facet_density1
 
 quantity vol2 fixed = V2 method facet_density2
+
+
+/*Define the shape of the bubbles*/
 
 vertices
 1  	0.0  0.0  0.0
@@ -82,4 +95,5 @@ faces  /* given by oriented edge loop */
 
 read 
 
+// Command sequence used to record the animation of a typical evolution
 gogovid := { set background 12; g300; r; g50; r; g10; r; g2; }
