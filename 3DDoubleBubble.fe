@@ -10,7 +10,7 @@ quantity facet_area energy method facet_scalar_integral
 scalar_integrand: exp(x^2+y^2+z^2)
 
 
-/*Define two facet_density methods which calculate the integral over the vector field on the facets. This vector field is such that its divergence equals the density. By stokes theorem, this calculates the weighted volume enclosed by the facets.*/
+/*Define two facet_density methods which calculate the integral over the vector field on the facets. This vector field is such that its divergence equals the density. By stokes theorem, this calculates the weighted volume enclosed by the facets. Unfortunately there is no closed form expression for such a vector field so its value is approximated by a taylor series expansion. The number of terms to be included in this expansion depends on the size of the bubbles under consideration. This can be estimated using the mathematica file, error_checker.nb*/
 
 method_instance facet_density1 method facet_vector_integral
 vector_integrand:

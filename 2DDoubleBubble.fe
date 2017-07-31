@@ -18,7 +18,7 @@ quantity edge_density energy method edge_scalar_integral
 scalar_integrand: exp(x^2+y^2)
 
 
-/*Define two area_density methods which calculate the integral over the vector field on the edges. This vector field is such that its divergence equals the density. By stokes theorem, this calculate the weighted area enclosed by the edges.*/
+/*Define two area_density methods which calculate the integral over the vector field on the edges. This vector field is such that its divergence equals the density. By stokes theorem, this calculate the weighted area enclosed by the edges. Unfortunately there is no closed form expression for such a vector field so its value is approximated by a taylor series expansion. The number of terms to be included in this expansion depends on the size of the bubbles under consideration. This can be estimated using the mathematica file, error_checker.nb*/
 
 method_instance area_density1 method edge_vector_integral
 vector_integrand:
