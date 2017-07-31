@@ -1,20 +1,29 @@
+/*Specify ambient dimension*/
+
 SPACE_DIMENSION 2
 
 
-#define a 0.5     /*The side length of the larger square*/
-#define b 1    /*The side length of the smaller square*/
-#define shift 0   /*The rightward shift of the two squares*/
-#define V1 1
-#define V2 2
+/*Create variables that determine initial conditions of the system*/
+
+#define a 0.5     	/*The side length of the larger square*/
+#define b 1    		/*The side length of the smaller square*/
+#define shift 0   	/*The rightward shift of the two squares*/
+#define V1 1		/*Volume of the smaller bubble*/
+#define V2 2		/*Volume of the larger bubble*/
+
+
+/*Weighted perimeter is energy associated with the edges*/
 
 quantity edge_density energy method edge_scalar_integral
 scalar_integrand: exp(x^2+y^2)
+
+
+/*Define two area_density methods which calculate the integral over the vector field on the edges. This vector field is such that its divergence equals the density. By stokes theorem, this calculate the weighted area enclosed by the edges.*/
 
 method_instance area_density1 method edge_vector_integral
 vector_integrand:
 q1: 0
 q2: exp(y^2)*(x+(x^3)/3+(x^5)/10+(x^7)/42+(x^9)/216+(x^11)/1320+(x^13)/9360+(x^15)/75600+(x^17)/685440+(x^19)/6894720+(x^21)/76204800 + (x^23)/918086400 + (x^25)/11975040000 + (x^27)/168129561600 + (x^29)/2528170444800 + (x^31)/40537905408000 + (x^33)/690452066304000 + (x^35)/12449059983360000 + (x^37)/236887827111936000 + (x^39)/4744158915944448000)
-
 
 method_instance area_density2 method edge_vector_integral
 vector_integrand:
@@ -22,10 +31,14 @@ q1: 0
 q2: exp(y^2)*(x+(x^3)/3+(x^5)/10+(x^7)/42+(x^9)/216+(x^11)/1320+(x^13)/9360+(x^15)/75600+(x^17)/685440+(x^19)/6894720+(x^21)/76204800 + (x^23)/918086400 + (x^25)/11975040000 + (x^27)/168129561600 + (x^29)/2528170444800 + (x^31)/40537905408000 + (x^33)/690452066304000 + (x^35)/12449059983360000 + (x^37)/236887827111936000 + (x^39)/4744158915944448000)
 
 
+/*Fix the weighted area inside the two bubbles to the specified values*/
+
 quantity area_const1 fixed = V1 method area_density1
 
 quantity area_const2 fixed = V2 method area_density2
 
+
+/*Define the shape of the bubbles*/
 
 vertices
 1   shift-a -0.5*a
@@ -60,4 +73,5 @@ read
 // Typical evolution
 gogo := { g10; r; g50; r; g 100; r; g 100; r; g100; r; g100; r; g100; lagrange 3; g30; }
 
+// Command sequence used to record the animation of a typical evolution
 gogovid := { set background 12; r; r; g1300; t 0.01; g100; t 0.01; g100; t 0.01; g100; t 0.01; g1000; r; g100; r; g100; r; g100; }
