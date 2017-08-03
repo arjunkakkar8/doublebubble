@@ -5,11 +5,10 @@ SPACE_DIMENSION 2
 
 /*Create variables that determine initial conditions of the system*/
 
-#define a 0.5     	/*The side length of the larger square*/
+#define a 0.9 	   	/*The side length of the larger square*/
 #define b 1    		/*The side length of the smaller square*/
-#define shift 0   	/*The rightward shift of the two squares*/
-#define V1 1		/*Volume of the smaller bubble*/
-#define V2 2		/*Volume of the larger bubble*/
+#define V1 5		/*Volume of the smaller bubble*/
+#define V2 5		/*Volume of the larger bubble*/
 
 
 /*Weighted perimeter is energy associated with the edges*/
@@ -41,32 +40,28 @@ quantity area_const2 fixed = V2 method area_density2
 /*Define the shape of the bubbles*/
 
 vertices
-1   shift-a -0.5*a
-2	shift   -0.5*a
-3   shift   -0.5*b
-4   shift+b -0.5*b
-5   shift+b  0.5*b
-6   shift    0.5*b
-7   shift    0.5*a
-8   shift-a  0.5*a 
-9   0.0  5.0
-10  0.0 -5.0
-11  5.0  0.0
-12 -5.0  0.0
+1   -a  -0.5*a
+2   0   -0.5*b
+3   b 	-0.5*b
+4   b  	 0.5*b
+5   0    0.5*b
+6    -a   0.5*a 
+7   0.0  5.0
+8   0.0 -5.0
+9   5.0  0.0
+10 -5.0  0.0
 
 
 edges  /* given by endpoints and attribute */
 1  1  2 edge_density color blue area_density1
-2  2  3 edge_density color blue area_density1
-3  3  6 edge_density color red area_density1 area_density2-
-4  6  7 edge_density color blue area_density1
-5  7  8 edge_density color blue area_density1
-6  8  1 edge_density color blue area_density1
-7  6  5 edge_density color green area_density2-
-8  5  4 edge_density color green area_density2-
-9  4  3 edge_density color green area_density2-
-10  9  10  //y-axis
-11 11  12  //x-axis
+2  2  5 edge_density color red area_density1 area_density2-
+3  5  6 edge_density color blue area_density1
+4  6  1 edge_density color blue area_density1
+5  5  4 edge_density color green area_density2-
+6  4  3 edge_density color green area_density2-
+7  3  2 edge_density color green area_density2-
+8  7  8  //y-axis
+9  9  10  //x-axis
 
 read
 
